@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Route, Switch, NavLink, Link, useHistory } from "react-router-dom";
-import { createDeck } from "../utils/api";
+import { createDeck } from "../../utils/api";
 
 export default function CreateDeck() {
   const initialFormState = {

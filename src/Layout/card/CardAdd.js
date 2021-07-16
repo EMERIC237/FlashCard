@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   Route,
   Switch,
@@ -7,13 +7,14 @@ import {
   useParams,
   useHistory,
 } from "react-router-dom";
-import { createCard } from "../../utils/api";
+import { createCard, readDeck } from "../../utils/api";
 
 export default function CardAdd() {
   const initialFormState = {
     front: "Front side Card",
     back: "Back side Card",
   };
+  const [deck, setDeck] = useState({});
   const [error, setError] = useState(undefined);
   const [formData, setFormData] = useState({ ...initialFormState });
   const { deckId } = useParams();
@@ -25,6 +26,27 @@ export default function CardAdd() {
       [target.name]: value,
     });
   };
+  useEffect(() => {
+    async function getDeck(deckId, signal) {
+      try {
+        const deckFromAPI = await readDeck(deckId, signal);
+        setDeck(deckFromAPI);
+      } catch (error) {
+        if (error.name === "AbortError") {
+          console.log("Aborted", error);
+        } else {
+          setError(error);
+        }
+      }
+    }
+    if (deckId) {
+      const abortController = new AbortController();
+      getDeck(deckId, abortController.signal);
+      return () => {
+        abortController.abort();
+      };
+    }
+  }, []);
 
   const handleSave = (event) => {
     async function postCard(deckId, card, signal) {
@@ -59,10 +81,10 @@ export default function CardAdd() {
         <NavLink to="/">Home</NavLink>
         <NavLink to="/">create Deck</NavLink>
       </header>
-      <h1>Add Card</h1>
+      <h1>{deck.name}: Add Card</h1>
       <form>
         <label htmlFor="front">
-          Font
+          Front
           <textarea
             id="front"
             type="text"
@@ -81,8 +103,16 @@ export default function CardAdd() {
             value={formData.back}
           />
         </label>
-        <button onClick={()=>{push(`/decks/${deckId}`)}}>Done</button>
-        <button type="submit" onClick={handleSave} >Save</button>
+        <button
+          onClick={() => {
+            push(`/decks/${deckId}`);
+          }}
+        >
+          Done
+        </button>
+        <button type="submit" onClick={handleSave}>
+          Save
+        </button>
       </form>
     </div>
   );

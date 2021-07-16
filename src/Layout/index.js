@@ -4,8 +4,11 @@ import Header from "./Header";
 import NotFound from "./NotFound";
 import DeckList from "./home/DeckList";
 import DeckStudy from "./deck/DeckStudy";
-import CreateDeck from "./CreateDeck";
+import CreateDeck from "./deck/CreateDeck";
 import CardAdd from "./card/CardAdd"
+import DeckProfile from "./deck/DeckProfile"
+import DeckEdit from "./deck/DeckEdit";
+import CardEdit from "./card/CardEdit"
 
 function Layout() {
   const {push} = useHistory();
@@ -22,11 +25,20 @@ function Layout() {
         <Route path="/decks/new">
           <CreateDeck />
         </Route>
-        <Route path="/decks/:deckId/study">
-          <DeckStudy />
+        <Route path="/decks/:deckId/cards/:cardId/edit">
+        <CardEdit />
         </Route>
         <Route path="/decks/:deckId/cards/new">
           <CardAdd />
+        </Route>
+        <Route path="/decks/:deckId/edit">
+          <DeckEdit />
+        </Route>
+        <Route path="/decks/:deckId/study">
+          <DeckStudy />
+        </Route>
+        <Route path="/decks/:deckId">
+          <DeckProfile />
         </Route>
         <Route>
           <NotFound />

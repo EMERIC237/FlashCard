@@ -6,34 +6,19 @@
       "id": 2
     },
     {
-      "name": "react-native",
-      "description": "react-native",
-      "id": 3
-    },
-    {
       "name": "conditional render",
       "description": "conditional-render",
       "id": 4
     },
     {
-      "name": "react component",
-      "description": "component",
+      "name": "React condition",
+      "description": "Learn how to render with condition in react",
       "id": 5
     },
     {
-      "name": "hello",
-      "description": "hello",
+      "name": "React tag",
+      "description": "React tag practice",
       "id": 6
-    },
-    {
-      "name": "hy",
-      "description": "hy",
-      "id": 7
-    },
-    {
-      "name": "",
-      "description": "",
-      "id": 8
     }
   ],
   "cards": [
@@ -60,6 +45,12 @@
       "back": "We use the <link> Tag from \"react-router-dom\"",
       "deckId": 2,
       "id": 7
+    },
+    {
+      "front": "Router or Route: is the same",
+      "back": "false",
+      "deckId": 5,
+      "id": 8
     }
   ]
 }

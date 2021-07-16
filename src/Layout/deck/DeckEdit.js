@@ -7,19 +7,12 @@ import {
   useParams,
   useHistory,
 } from "react-router-dom";
-import { readDeck, readCard, updateCard } from "../../utils/api";
+import { readDeck, updateDeck } from "../../utils/api";
 
-function CardEdit() {
-  const { deckId, cardId } = useParams();
-  const { push } = useHistory();
-  const [deck, setDeck] = useState(null);
-  const [card, setCard] = useState(null);
+function DeckEdit() {
+  const { deckId } = useParams();
+  const [deck, setDeck] = useState({});
   const [error, setError] = useState(null);
-  const initialFormState = {
-    front: "",
-    back: "",
-  };
-  const [formData, setFormData] = useState({ ...initialFormState });
 
   useEffect(() => {
     async function getDeck(deckId, signal) {
@@ -34,30 +27,21 @@ function CardEdit() {
         }
       }
     }
-
     if (deckId) {
       const abortController = new AbortController();
       getDeck(deckId, abortController.signal);
-      async function getCard(cardId, signal) {
-        try {
-          const cardFromAPI = await readCard(cardId, signal);
-          setCard(cardFromAPI);
-        } catch (error) {
-          if (error.name === "AbortError") {
-            console.log("Aborted", error);
-          } else {
-            setError(error);
-          }
-        }
-      }
-      getCard(cardId, abortController.signal);
-
       return () => {
         abortController.abort();
       };
     }
-  }, [cardId]);
+  }, []);
 
+  const initialFormState = {
+    name: "",
+    description: "",
+  };
+  const [formData, setFormData] = useState({ ...initialFormState });
+  const { push } = useHistory();
   const handleChange = ({ target }) => {
     const value = target.value;
     setFormData({
@@ -67,9 +51,9 @@ function CardEdit() {
   };
 
   const handleSubmit = (event) => {
-    async function CardUpdate(updatedCard, signal) {
+    async function DeckUpdate(updatedDeck, signal) {
       try {
-        const response = await updateCard(updatedCard, signal);
+        const response = await updateDeck(updatedDeck, signal);
       } catch (error) {
         if (error.name === "AbortError") {
           console.log("Aborted", error);
@@ -79,50 +63,47 @@ function CardEdit() {
       }
     }
     const abortController = new AbortController();
-    card.front = formData.front;
-    card.back = formData.back;
-    if (card.front !== "" && card.back !== "") {
-      CardUpdate(card, abortController.signal);
+    deck.name = formData.name;
+    deck.description = formData.description;
+    if (deck.name !== "" && deck.description !== "") {
+      DeckUpdate(deck, abortController.signal);
       setFormData({ ...initialFormState });
       // push(`/decks/${deckId}`)
       console.log("handle submit applied");
-      push(`decks/${deckId}`);
     } else {
       window.confirm("Please put some entry");
     }
   };
-
   return (
     <div>
       <header>
         <NavLink to="/">Home</NavLink>
         <NavLink to="/">create Deck</NavLink>
       </header>
-      <h1>Add Card</h1>
+      <h1>Edit Deck</h1>
       <form>
-        <label htmlFor="front">
-          Front
-          <textarea
-            id="front"
+        <label htmlFor="name">
+          Name
+          <input
+            id="name"
             type="text"
-            name="front"
+            name="name"
             onChange={handleChange}
-            value={formData.front}
+            value={formData.name}
           />
         </label>
-        <label htmlFor="back">
-          Back
+        <label htmlFor="description">
+          Description
           <textarea
-            id="back"
-            type="text"
-            name="back"
+            id="description"
+            name="description"
             onChange={handleChange}
-            value={formData.back}
+            value={formData.description}
           />
         </label>
         <button
           onClick={() => {
-            push(`decks/${deckId}`);
+            push(`/desk/${deckId}`);
           }}
         >
           Cancel
@@ -133,4 +114,4 @@ function CardEdit() {
   );
 }
 
-export default CardEdit;
+export default DeckEdit;

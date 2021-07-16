@@ -6,6 +6,7 @@ export default function Deck({ deck }) {
     const deleteClickHandler = () => {
         if(window.confirm(`Delete this deck?\n\n\You will not be able to recover it.` )){
             deleteDeck(deck.id)
+            window.location.reload();
         };
     };
     
@@ -16,7 +17,7 @@ export default function Deck({ deck }) {
         <h2>{deck.name}</h2>
         <p>{deck.description}</p>
       </div>
-      <button>View</button>
+      <button onClick={()=>push(`/decks/${deck.id}`)}>View</button>
       <button onClick={()=>push(`/decks/${deck.id}/study`)}>Study</button>
       <button onClick={deleteClickHandler}>Delete</button>
     </article>

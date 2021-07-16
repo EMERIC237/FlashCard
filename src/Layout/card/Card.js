@@ -1,8 +1,9 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import { deleteCard } from "../../utils/api";
 
-export default function Card({ card }) {
+export default function Card({ card, deckId }) {
+  const { push } = useHistory();
   const deleteClickHandler = () => {
     if (
       window.confirm(
@@ -19,7 +20,13 @@ export default function Card({ card }) {
         <p>{card.front}</p>
         <p>{card.back}</p>
       </div>
-      <button>Edit</button>
+      <button
+        onClick={() => {
+          push(`/decks/${deckId}/cards/${card.id}/edit`);
+        }}
+      >
+        Edit
+      </button>
       <button onClick={deleteClickHandler}>Delete</button>
     </article>
   );
