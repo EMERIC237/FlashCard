@@ -1,25 +1,31 @@
 import React from "react";
-import { Link , useHistory} from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import { deleteDeck } from "../../utils/api";
+import { Card, Button } from "react-bootstrap";
 export default function Deck({ deck }) {
-  const {push} = useHistory();
-    const deleteClickHandler = () => {
-        if(window.confirm(`Delete this deck?\n\n\You will not be able to recover it.` )){
-            deleteDeck(deck.id)
-            window.location.reload();
-        };
-    };
-    
+  const { push } = useHistory();
+  const deleteClickHandler = () => {
+    if (
+      window.confirm(
+        `Delete this deck?\n\n\You will not be able to recover it.`
+      )
+    ) {
+      deleteDeck(deck.id);
+      window.location.reload();
+    }
+  };
 
   return (
-    <article>
-      <div>
-        <h2>{deck.name}</h2>
-        <p>{deck.description}</p>
-      </div>
-      <button onClick={()=>push(`/decks/${deck.id}`)}>View</button>
-      <button onClick={()=>push(`/decks/${deck.id}/study`)}>Study</button>
-      <button onClick={deleteClickHandler}>Delete</button>
-    </article>
+    <div>
+      <Card>
+        <Card.Body>
+          <Card.Title>{deck.name}<span> {deck.cards.length} cards</span></Card.Title>
+          <Card.Text>{deck.description}</Card.Text>
+          <Button variant="secondary" href={`/decks/${deck.id}`}>View</Button>
+          <Button variant="primary" href={`/decks/${deck.id}/study`}>Study</Button>
+          <Button variant="danger" onClick={deleteClickHandler}>Delete</Button>
+        </Card.Body>
+      </Card>
+    </div>
   );
 }

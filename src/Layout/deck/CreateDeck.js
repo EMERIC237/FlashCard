@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Route, Switch, NavLink, Link, useHistory } from "react-router-dom";
 import { createDeck } from "../../utils/api";
+import { Form, Button, Breadcrumb } from "react-bootstrap";
 
 export default function CreateDeck() {
   const initialFormState = {
@@ -32,49 +33,55 @@ export default function CreateDeck() {
     }
     const abortController = new AbortController();
     const NewDeck = {
-        "name": formData.name,
-        "description": formData.description,
-      };
-      if (NewDeck.name !=="" && NewDeck.description !==""){
+      name: formData.name,
+      description: formData.description,
+    };
+    if (NewDeck.name !== "" && NewDeck.description !== "") {
       postDeck(NewDeck, abortController.signal);
       setFormData({ ...initialFormState });
       // push(`/decks/${deckId}`)
       console.log("handle submit applied");
-      }else{
-        window.confirm("Please put some entry");
-      }
-      
+    } else {
+      window.confirm("Please put some entry");
+    }
   };
   return (
     <div>
-      <header>
-        <NavLink to="/">Home</NavLink>
-        <NavLink to="/">create Deck</NavLink>
-      </header>
+      <Breadcrumb>
+        <Breadcrumb.Item href="/">Home</Breadcrumb.Item>
+        <Breadcrumb.Item active>Create Deck</Breadcrumb.Item>
+      </Breadcrumb>
       <h1>Create Deck</h1>
-      <form>
-        <label htmlFor="name">
-          Name
-          <input
+      <Form>
+        <Form.Group className="mb-3" controlId="name">
+          <Form.Label htmlFor="name">Name</Form.Label>
+          <Form.Control
             id="name"
             type="text"
-            name="name"
+            placeholder="Deck name"
             onChange={handleChange}
             value={formData.name}
           />
-        </label>
-        <label htmlFor="description">
-          Description
-          <textarea
+        </Form.Group>
+        <Form.Group className="mb-3" controlId="description">
+          <Form.Label>Description</Form.Label>
+          <Form.Control
+            as="textarea"
+            rows={3}
             id="description"
             name="description"
+            placeholder="Brief description of the deck"
             onChange={handleChange}
             value={formData.description}
           />
-        </label>
-        <button onClick={()=>{push("/")}}>Cancel</button>
-        <button onClick={handleSubmit}>Submit</button>
-      </form>
+        </Form.Group>
+        <Button variant="secondary" href={"/"}>
+          Cancel
+        </Button>
+        <Button variant="primary" type="submit" onClick={handleSubmit}>
+          Submit
+        </Button>
+      </Form>
     </div>
   );
 }

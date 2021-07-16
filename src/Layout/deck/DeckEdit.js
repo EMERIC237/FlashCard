@@ -7,6 +7,7 @@ import {
   useParams,
   useHistory,
 } from "react-router-dom";
+import { Breadcrumb,Form,Button } from "react-bootstrap";
 import { readDeck, updateDeck } from "../../utils/api";
 
 function DeckEdit() {
@@ -76,40 +77,42 @@ function DeckEdit() {
   };
   return (
     <div>
-      <header>
-        <NavLink to="/">Home</NavLink>
-        <NavLink to="/">create Deck</NavLink>
-      </header>
+      <Breadcrumb>
+        <Breadcrumb.Item href="/">Home</Breadcrumb.Item>
+        <Breadcrumb.Item href={`/decks/${deckId}`}>{deck.name}</Breadcrumb.Item>
+        <Breadcrumb.Item active>Edit Deck</Breadcrumb.Item>
+      </Breadcrumb>
       <h1>Edit Deck</h1>
-      <form>
-        <label htmlFor="name">
-          Name
-          <input
+      <Form>
+        <Form.Group className="mb-3" controlId="name">
+          <Form.Label htmlFor="name">Name</Form.Label>
+          <Form.Control
             id="name"
             type="text"
-            name="name"
+            placeholder="Deck name"
             onChange={handleChange}
             value={formData.name}
           />
-        </label>
-        <label htmlFor="description">
-          Description
-          <textarea
+        </Form.Group>
+        <Form.Group className="mb-3" controlId="description">
+          <Form.Label>Description</Form.Label>
+          <Form.Control
+            as="textarea"
+            rows={3}
             id="description"
             name="description"
+            placeholder="Brief description of the deck"
             onChange={handleChange}
             value={formData.description}
           />
-        </label>
-        <button
-          onClick={() => {
-            push(`/desk/${deckId}`);
-          }}
-        >
+        </Form.Group>
+        <Button variant="secondary" href={"/"}>
           Cancel
-        </button>
-        <button onClick={handleSubmit}>Submit</button>
-      </form>
+        </Button>
+        <Button variant="primary" type="submit" onClick={handleSubmit}>
+          Submit
+        </Button>
+      </Form>
     </div>
   );
 }

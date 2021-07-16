@@ -8,7 +8,8 @@ import {
   useHistory,
 } from "react-router-dom";
 import { readDeck, deleteDeck } from "../../utils/api";
-import Card from "../card/Card";
+import { Card, Breadcrumb, Button } from "react-bootstrap";
+import CardUnit from "../card/CardUnit";
 
 function DeckProfile() {
   const { deckId } = useParams();
@@ -54,23 +55,24 @@ function DeckProfile() {
   };
 
   const listForCards = deck.cards.map((card) => (
-    <Card key={card.id} card={card} deckId={deckId}/>
+    <CardUnit key={card.id} card={card} deckId={deckId} />
   ));
 
   return (
     <div>
-      <header>
-        <NavLink to="/">Home</NavLink>
-        <NavLink to="/">{deck.name}</NavLink>
-        <NavLink to="/">Study</NavLink>
-      </header>
+      <Breadcrumb>
+        <Breadcrumb.Item href="/">Home</Breadcrumb.Item>
+        <Breadcrumb.Item active>{deck.name}</Breadcrumb.Item>
+      </Breadcrumb>
       <div>
-        <h2>{deck.name}</h2>
-        <p>{deck.description}</p>
-        <button onClick={() => push(`/decks/${deckId}/edit`)}>Edit</button>
-        <button onClick={() => push(`/decks/${deck.id}/study`)}>Study</button>
-        <button onClick={() => push(`/decks/${deckId}/cards/new`)}>Add Cards</button>
-        <button onClick={deleteClickHandler}>Delete</button>
+        <Card.Title>{deck.name}</Card.Title>
+        <Card.Text>{deck.description}</Card.Text>
+        <Button variant="secondary" onClick={() => push(`/decks/${deckId}/edit`)}>Edit</Button>
+        <Button variant="primary" onClick={() => push(`/decks/${deck.id}/study`)}>Study</Button>
+        <Button variant="primary" onClick={() => push(`/decks/${deckId}/cards/new`)}>
+          Add Cards
+        </Button>
+        <Button variant="danger" onClick={deleteClickHandler}>Delete</Button>
       </div>
       <h2>Cards</h2>
       {listForCards}

@@ -11,11 +11,6 @@
       "id": 4
     },
     {
-      "name": "React condition",
-      "description": "Learn how to render with condition in react",
-      "id": 5
-    },
-    {
       "name": "React tag",
       "description": "React tag practice",
       "id": 6
@@ -45,12 +40,6 @@
       "back": "We use the <link> Tag from \"react-router-dom\"",
       "deckId": 2,
       "id": 7
-    },
-    {
-      "front": "Router or Route: is the same",
-      "back": "false",
-      "deckId": 5,
-      "id": 8
     }
   ]
 }

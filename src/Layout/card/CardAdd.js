@@ -8,7 +8,7 @@ import {
   useHistory,
 } from "react-router-dom";
 import { createCard, readDeck } from "../../utils/api";
-
+import { Form, Button, Breadcrumb } from "react-bootstrap";
 export default function CardAdd() {
   const initialFormState = {
     front: "Front side Card",
@@ -77,43 +77,50 @@ export default function CardAdd() {
   };
   return (
     <div>
-      <header>
-        <NavLink to="/">Home</NavLink>
-        <NavLink to="/">create Deck</NavLink>
-      </header>
+      <Breadcrumb>
+        <Breadcrumb.Item href="/">Home</Breadcrumb.Item>
+        <Breadcrumb.Item href={`/decks/${deckId}`}> deck name</Breadcrumb.Item>
+        <Breadcrumb.Item active>Create Deck</Breadcrumb.Item>
+      </Breadcrumb>
       <h1>{deck.name}: Add Card</h1>
-      <form>
-        <label htmlFor="front">
-          Front
-          <textarea
+      <Form>
+        <Form.Group className="mb-3" controlId="front">
+          <Form.Label htmlFor="front">Front</Form.Label>
+          <Form.Control
+            as="textarea"
+            rows={2}
             id="front"
-            type="text"
             name="front"
+            placeholder="Question"
             onChange={handleChange}
             value={formData.front}
           />
-        </label>
-        <label htmlFor="back">
-          Back
-          <textarea
+        </Form.Group>
+        <Form.Group className="mb-3" controlId="back">
+          <Form.Label htmlFor="front">Back</Form.Label>
+          <Form.Control
+            as="textarea"
+            rows={2}
             id="back"
-            type="text"
             name="back"
+            placeholder="Answer"
             onChange={handleChange}
             value={formData.back}
           />
-        </label>
-        <button
+        </Form.Group>
+
+        <Button
+          variant="secondary"
           onClick={() => {
             push(`/decks/${deckId}`);
           }}
         >
           Done
-        </button>
-        <button type="submit" onClick={handleSave}>
+        </Button>
+        <Button type="submit" onClick={handleSave}>
           Save
-        </button>
-      </form>
+        </Button>
+      </Form>
     </div>
   );
 }

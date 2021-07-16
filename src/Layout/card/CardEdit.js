@@ -7,6 +7,7 @@ import {
   useParams,
   useHistory,
 } from "react-router-dom";
+import { Breadcrumb,Form,Button } from "react-bootstrap";
 import { readDeck, readCard, updateCard } from "../../utils/api";
 
 function CardEdit() {
@@ -91,44 +92,48 @@ function CardEdit() {
       window.confirm("Please put some entry");
     }
   };
+  console.log(deck);
 
   return (
     <div>
-      <header>
-        <NavLink to="/">Home</NavLink>
-        <NavLink to="/">create Deck</NavLink>
-      </header>
-      <h1>Add Card</h1>
-      <form>
-        <label htmlFor="front">
-          Front
-          <textarea
+      <Breadcrumb>
+        <Breadcrumb.Item href="/">Home</Breadcrumb.Item>
+        <Breadcrumb.Item href={`/decks/${deckId}`}>deck name</Breadcrumb.Item>
+        <Breadcrumb.Item active>Edit Deck</Breadcrumb.Item>
+      </Breadcrumb>
+      <h1>Edit Card</h1>
+      <Form>
+        <Form.Group className="mb-3" controlId="front">
+          <Form.Label htmlFor="front">Front</Form.Label>
+          <Form.Control
+            as="textarea"
+            rows={2}
             id="front"
-            type="text"
             name="front"
             onChange={handleChange}
             value={formData.front}
           />
-        </label>
-        <label htmlFor="back">
-          Back
-          <textarea
+        </Form.Group>
+        <Form.Group className="mb-3" controlId="back">
+          <Form.Label htmlFor="front">Back</Form.Label>
+          <Form.Control
+            as="textarea"
+            rows={2}
             id="back"
-            type="text"
             name="back"
             onChange={handleChange}
             value={formData.back}
           />
-        </label>
-        <button
+        </Form.Group>
+        <Button
           onClick={() => {
             push(`decks/${deckId}`);
           }}
         >
           Cancel
-        </button>
-        <button onClick={handleSubmit}>Submit</button>
-      </form>
+        </Button>
+        <Button onClick={handleSubmit}>Submit</Button>
+      </Form>
     </div>
   );
 }
