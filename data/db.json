@@ -1,0 +1,65 @@
+{
+  "decks": [
+    {
+      "name": "React Router",
+      "description": "React Router is a collection of navigational components that compose declaratively with your application.",
+      "id": 2
+    },
+    {
+      "name": "react-native",
+      "description": "react-native",
+      "id": 3
+    },
+    {
+      "name": "conditional render",
+      "description": "conditional-render",
+      "id": 4
+    },
+    {
+      "name": "react component",
+      "description": "component",
+      "id": 5
+    },
+    {
+      "name": "hello",
+      "description": "hello",
+      "id": 6
+    },
+    {
+      "name": "hy",
+      "description": "hy",
+      "id": 7
+    },
+    {
+      "name": "",
+      "description": "",
+      "id": 8
+    }
+  ],
+  "cards": [
+    {
+      "front": "What path will match the follow Route?\n<Route>\n  <NotFound />\n</Route>",
+      "back": "All paths. A route with no path matches all URL's",
+      "deckId": 2,
+      "id": 4
+    },
+    {
+      "front": "What does <Switch> do?",
+      "back": "Renders the first matching child <Route> ",
+      "deckId": 2,
+      "id": 5
+    },
+    {
+      "front": "Front side Card",
+      "back": "Back side Card",
+      "deckId": 2,
+      "id": 6
+    },
+    {
+      "front": "How to use a link in react",
+      "back": "We use the <link> Tag from \"react-router-dom\"",
+      "deckId": 2,
+      "id": 7
+    }
+  ]
+}
