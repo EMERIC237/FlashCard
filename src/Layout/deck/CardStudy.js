@@ -25,7 +25,10 @@ function CardStudy({ card, index, lengthOfCards, handleNumber }) {
           <Button
             variant="primary"
             style={{ display: display }}
-            onClick={handleNumber}
+            onClick={() => {
+              handleNumber();
+              setFlip(false);
+            }}
           >
             Next
           </Button>

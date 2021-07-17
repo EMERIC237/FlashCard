@@ -6,7 +6,7 @@ import CardForm from "./CardForm";
 function CardEdit() {
   const { deckId, cardId } = useParams();
   const { push } = useHistory();
-  const [deck, setDeck] = useState(null);
+  const [deck, setDeck] = useState({});
   const [card, setCard] = useState(null);
   const [error, setError] = useState(null);
   const initialFormState = {
@@ -36,6 +36,7 @@ function CardEdit() {
         try {
           const cardFromAPI = await readCard(cardId, signal);
           setCard(cardFromAPI);
+          setFormData({ front: cardFromAPI.front, back: cardFromAPI.back });
         } catch (error) {
           if (error.name === "AbortError") {
             console.log("Aborted", error);
@@ -50,7 +51,7 @@ function CardEdit() {
         abortController.abort();
       };
     }
-  }, [cardId]);
+  }, []);
 
   const handleChange = ({ target }) => {
     const value = target.value;

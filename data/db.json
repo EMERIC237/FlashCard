@@ -1,8 +1,8 @@
 {
   "decks": [
     {
-      "name": "React Router",
-      "description": "React Router is a collection of navigational components that compose declaratively with your application.",
+      "name": "React component",
+      "description": "React Router is a collection of navigational components that compose declaratively with your applications and components.",
       "id": 2
     },
     {
@@ -32,7 +32,7 @@
     },
     {
       "front": "What tag replace if statement in REACT",
-      "back": "<WHEN/>",
+      "back": "<WHEN/> and <route>",
       "deckId": 3,
       "id": 8
     },
@@ -47,6 +47,12 @@
       "back": "hola",
       "deckId": 3,
       "id": 10
+    },
+    {
+      "front": "What is a Route ?",
+      "back": "A tag to display a component depending on a condition",
+      "deckId": 3,
+      "id": 11
     }
   ]
 }
