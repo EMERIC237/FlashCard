@@ -1,14 +1,7 @@
 import React, { useState, useEffect } from "react";
-import {
-  Route,
-  Switch,
-  NavLink,
-  Link,
-  useParams,
-  useHistory,
-} from "react-router-dom";
-import { Breadcrumb,Form,Button } from "react-bootstrap";
+import { useParams, useHistory } from "react-router-dom";
 import { readDeck, readCard, updateCard } from "../../utils/api";
+import CardForm from "./CardForm";
 
 function CardEdit() {
   const { deckId, cardId } = useParams();
@@ -96,44 +89,12 @@ function CardEdit() {
 
   return (
     <div>
-      <Breadcrumb>
-        <Breadcrumb.Item href="/">Home</Breadcrumb.Item>
-        <Breadcrumb.Item href={`/decks/${deckId}`}>deck name</Breadcrumb.Item>
-        <Breadcrumb.Item active>Edit Deck</Breadcrumb.Item>
-      </Breadcrumb>
-      <h1>Edit Card</h1>
-      <Form>
-        <Form.Group className="mb-3" controlId="front">
-          <Form.Label htmlFor="front">Front</Form.Label>
-          <Form.Control
-            as="textarea"
-            rows={2}
-            id="front"
-            name="front"
-            onChange={handleChange}
-            value={formData.front}
-          />
-        </Form.Group>
-        <Form.Group className="mb-3" controlId="back">
-          <Form.Label htmlFor="front">Back</Form.Label>
-          <Form.Control
-            as="textarea"
-            rows={2}
-            id="back"
-            name="back"
-            onChange={handleChange}
-            value={formData.back}
-          />
-        </Form.Group>
-        <Button
-          onClick={() => {
-            push(`decks/${deckId}`);
-          }}
-        >
-          Cancel
-        </Button>
-        <Button onClick={handleSubmit}>Submit</Button>
-      </Form>
+      <CardForm
+        deckId={deckId}
+        handleChange={handleChange}
+        formData={formData}
+        handleSubmit={handleSubmit}
+      />
     </div>
   );
 }

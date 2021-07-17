@@ -1,14 +1,7 @@
 import React, { useState, useEffect } from "react";
-import {
-  Route,
-  Switch,
-  NavLink,
-  Link,
-  useParams,
-  useHistory,
-} from "react-router-dom";
-import { Breadcrumb,Form,Button } from "react-bootstrap";
+import { useParams } from "react-router-dom";
 import { readDeck, updateDeck } from "../../utils/api";
+import DeckForm from "./DeckForm";
 
 function DeckEdit() {
   const { deckId } = useParams();
@@ -42,7 +35,7 @@ function DeckEdit() {
     description: "",
   };
   const [formData, setFormData] = useState({ ...initialFormState });
-  const { push } = useHistory();
+
   const handleChange = ({ target }) => {
     const value = target.value;
     setFormData({
@@ -77,42 +70,11 @@ function DeckEdit() {
   };
   return (
     <div>
-      <Breadcrumb>
-        <Breadcrumb.Item href="/">Home</Breadcrumb.Item>
-        <Breadcrumb.Item href={`/decks/${deckId}`}>{deck.name}</Breadcrumb.Item>
-        <Breadcrumb.Item active>Edit Deck</Breadcrumb.Item>
-      </Breadcrumb>
-      <h1>Edit Deck</h1>
-      <Form>
-        <Form.Group className="mb-3" controlId="name">
-          <Form.Label htmlFor="name">Name</Form.Label>
-          <Form.Control
-            id="name"
-            type="text"
-            placeholder="Deck name"
-            onChange={handleChange}
-            value={formData.name}
-          />
-        </Form.Group>
-        <Form.Group className="mb-3" controlId="description">
-          <Form.Label>Description</Form.Label>
-          <Form.Control
-            as="textarea"
-            rows={3}
-            id="description"
-            name="description"
-            placeholder="Brief description of the deck"
-            onChange={handleChange}
-            value={formData.description}
-          />
-        </Form.Group>
-        <Button variant="secondary" href={"/"}>
-          Cancel
-        </Button>
-        <Button variant="primary" type="submit" onClick={handleSubmit}>
-          Submit
-        </Button>
-      </Form>
+      <DeckForm
+        handleChange={handleChange}
+        formData={formData}
+        handleSubmit={handleSubmit}
+      />
     </div>
   );
 }

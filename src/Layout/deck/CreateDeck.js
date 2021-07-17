@@ -1,7 +1,6 @@
 import React, { useState } from "react";
-import { Route, Switch, NavLink, Link, useHistory } from "react-router-dom";
 import { createDeck } from "../../utils/api";
-import { Form, Button, Breadcrumb } from "react-bootstrap";
+import DeckForm from "./DeckForm";
 
 export default function CreateDeck() {
   const initialFormState = {
@@ -10,7 +9,7 @@ export default function CreateDeck() {
   };
   const [formData, setFormData] = useState({ ...initialFormState });
   const [error, setError] = useState(undefined);
-  const { push } = useHistory();
+
   const handleChange = ({ target }) => {
     const value = target.value;
     setFormData({
@@ -47,41 +46,11 @@ export default function CreateDeck() {
   };
   return (
     <div>
-      <Breadcrumb>
-        <Breadcrumb.Item href="/">Home</Breadcrumb.Item>
-        <Breadcrumb.Item active>Create Deck</Breadcrumb.Item>
-      </Breadcrumb>
-      <h1>Create Deck</h1>
-      <Form>
-        <Form.Group className="mb-3" controlId="name">
-          <Form.Label htmlFor="name">Name</Form.Label>
-          <Form.Control
-            id="name"
-            type="text"
-            placeholder="Deck name"
-            onChange={handleChange}
-            value={formData.name}
-          />
-        </Form.Group>
-        <Form.Group className="mb-3" controlId="description">
-          <Form.Label>Description</Form.Label>
-          <Form.Control
-            as="textarea"
-            rows={3}
-            id="description"
-            name="description"
-            placeholder="Brief description of the deck"
-            onChange={handleChange}
-            value={formData.description}
-          />
-        </Form.Group>
-        <Button variant="secondary" href={"/"}>
-          Cancel
-        </Button>
-        <Button variant="primary" type="submit" onClick={handleSubmit}>
-          Submit
-        </Button>
-      </Form>
+      <DeckForm
+        handleChange={handleChange}
+        formData={formData}
+        handleSubmit={handleSubmit}
+      />
     </div>
   );
 }

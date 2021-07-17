@@ -14,9 +14,9 @@ import Button from "react-bootstrap/Button";
 function Layout() {
   return (
     <Fragment>
+      <Header />
       <Switch>
         <Route exact path="/">
-          <Header />
           <div className="container">
             <Button variant="secondary" href="/decks/new">
               Create Deck
