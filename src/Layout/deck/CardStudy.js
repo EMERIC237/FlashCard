@@ -16,7 +16,7 @@ function CardStudy({ card, index, lengthOfCards, handleNumber }) {
       <Card>
         <Card.Body>
           <Card.Title>
-            Card{index + 1} of {lengthOfCards}
+            Card {index + 1} of {lengthOfCards}
           </Card.Title>
           <Card.Text>{text}</Card.Text>
           <Button variant="secondary" onClick={() => setFlip(!flip)}>

@@ -47,6 +47,7 @@ export default function CreateDeck() {
   return (
     <div>
       <DeckForm
+        action={"Create"}
         handleChange={handleChange}
         formData={formData}
         handleSubmit={handleSubmit}

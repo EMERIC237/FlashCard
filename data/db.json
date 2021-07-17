@@ -4,6 +4,11 @@
       "name": "React Router",
       "description": "React Router is a collection of navigational components that compose declaratively with your application.",
       "id": 2
+    },
+    {
+      "name": "hy",
+      "description": "hello",
+      "id": 3
     }
   ],
   "cards": [
@@ -24,6 +29,24 @@
       "back": "We use the <link> Tag from \"react-router-dom\"",
       "deckId": 2,
       "id": 7
+    },
+    {
+      "front": "What tag replace if statement in REACT",
+      "back": "<WHEN/>",
+      "deckId": 3,
+      "id": 8
+    },
+    {
+      "front": "True or false",
+      "back": "false",
+      "deckId": 3,
+      "id": 9
+    },
+    {
+      "front": "emeric",
+      "back": "hola",
+      "deckId": 3,
+      "id": 10
     }
   ]
 }

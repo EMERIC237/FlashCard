@@ -71,6 +71,7 @@ function DeckEdit() {
   return (
     <div>
       <DeckForm
+        action={"Edit"}
         handleChange={handleChange}
         formData={formData}
         handleSubmit={handleSubmit}

@@ -1,14 +1,25 @@
 import React from "react";
-import { Form, Button } from "react-bootstrap";
-export default function DeckForm({ handleChange, formData, handleSubmit }) {
+import { Breadcrumb, Form, Button } from "react-bootstrap";
+export default function DeckForm({
+  action,
+  handleChange,
+  formData,
+  handleSubmit,
+}) {
   return (
     <div>
+      <Breadcrumb>
+        <Breadcrumb.Item href="/">Home</Breadcrumb.Item>
+        <Breadcrumb.Item active>{action} Deck</Breadcrumb.Item>
+      </Breadcrumb>
+      <h1>{action} Deck</h1>
       <Form>
         <Form.Group className="mb-3" controlId="name">
-          <Form.Label htmlFor="name">Name</Form.Label>
+          <Form.Label>Name</Form.Label>
           <Form.Control
             id="name"
-            type="text"
+            as="input"
+            name="name"
             placeholder="Deck name"
             onChange={handleChange}
             value={formData.name}
@@ -17,9 +28,9 @@ export default function DeckForm({ handleChange, formData, handleSubmit }) {
         <Form.Group className="mb-3" controlId="description">
           <Form.Label>Description</Form.Label>
           <Form.Control
+            id="description"
             as="textarea"
             rows={3}
-            id="description"
             name="description"
             placeholder="Brief description of the deck"
             onChange={handleChange}

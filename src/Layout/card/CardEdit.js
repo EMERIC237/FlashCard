@@ -90,6 +90,7 @@ function CardEdit() {
   return (
     <div>
       <CardForm
+        action={"Edit"}
         deckId={deckId}
         handleChange={handleChange}
         formData={formData}

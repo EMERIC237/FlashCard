@@ -3,11 +3,10 @@ import { useParams } from "react-router-dom";
 import { createCard, readDeck } from "../../utils/api";
 import CardForm from "./CardForm";
 
-
 export default function CardAdd() {
   const initialFormState = {
-    front: "Front side Card",
-    back: "Back side Card",
+    front: "",
+    back: "",
   };
   const [deck, setDeck] = useState({});
   const [error, setError] = useState(undefined);
@@ -72,6 +71,7 @@ export default function CardAdd() {
   return (
     <div>
       <CardForm
+        action={"Add"}
         deckId={deckId}
         handleChange={handleChange}
         formData={formData}
