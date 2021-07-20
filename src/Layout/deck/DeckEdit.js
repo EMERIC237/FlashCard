@@ -63,12 +63,16 @@ function DeckEdit() {
     if (deck.name !== "" && deck.description !== "") {
       DeckUpdate(deck, abortController.signal);
       setFormData({ ...initialFormState });
-      // push(`/decks/${deckId}`)
-      console.log("handle submit applied");
     } else {
       window.confirm("Please put some entry");
     }
   };
+
+  if (error) {
+    console.log(error);
+    return <div>NO DECK: FETCH ERROR</div>;
+  }
+
   return (
     <div>
       <DeckForm

@@ -68,6 +68,11 @@ export default function CardAdd() {
     }
     setFormData({ ...initialFormState });
   };
+
+  if (error) {
+    console.log(error);
+    return <div>POST ERROR</div>;
+  }
   return (
     <div>
       <CardForm

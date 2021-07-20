@@ -21,7 +21,6 @@ export default function CreateDeck() {
     async function postDeck(deck, signal) {
       try {
         const response = await createDeck(deck, signal);
-        console.log(response);
       } catch (error) {
         if (error.name === "AbortError") {
           console.log("Aborted", error);
@@ -38,12 +37,15 @@ export default function CreateDeck() {
     if (NewDeck.name !== "" && NewDeck.description !== "") {
       postDeck(NewDeck, abortController.signal);
       setFormData({ ...initialFormState });
-      // push(`/decks/${deckId}`)
-      console.log("handle submit applied");
     } else {
       window.confirm("Please put some entry");
     }
   };
+
+  if (error) {
+    console.log(error);
+    return <div>POST ERROR</div>;
+  }
   return (
     <div>
       <DeckForm

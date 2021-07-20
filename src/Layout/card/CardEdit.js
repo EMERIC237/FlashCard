@@ -79,14 +79,16 @@ function CardEdit() {
     if (card.front !== "" && card.back !== "") {
       CardUpdate(card, abortController.signal);
       setFormData({ ...initialFormState });
-      // push(`/decks/${deckId}`)
-      console.log("handle submit applied");
       push(`decks/${deckId}`);
     } else {
       window.confirm("Please put some entry");
     }
   };
-  console.log(deck);
+
+  if (error) {
+    console.log(error);
+    return <div>NO CARD: FETCH ERROR</div>;
+  }
 
   return (
     <div>

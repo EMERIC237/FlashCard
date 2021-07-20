@@ -1,8 +1,8 @@
-import { NavLink, useHistory, useParams } from "react-router-dom";
+import { useHistory, useParams } from "react-router-dom";
 import React, { useState, useEffect } from "react";
 import { readDeck } from "../../utils/api";
 import CardStudy from "./CardStudy";
-import {Breadcrumb, Card, Button} from "react-bootstrap";
+import { Breadcrumb, Button } from "react-bootstrap";
 
 function DeckStudy() {
   const { deckId } = useParams();
@@ -34,7 +34,8 @@ function DeckStudy() {
   }, [deckId]);
 
   if (error) {
-    return <div>NO DECKS HERE</div>;
+    console.log(error);
+    return <div>NO DECK: FETCH ERROR</div>;
   }
 
   if (!deck) {
@@ -67,7 +68,9 @@ function DeckStudy() {
       <header>
         <Breadcrumb>
           <Breadcrumb.Item href="/">Home</Breadcrumb.Item>
-          <Breadcrumb.Item href={`/decks/${deckId}`}>{deck.name}</Breadcrumb.Item>
+          <Breadcrumb.Item href={`/decks/${deckId}`}>
+            {deck.name}
+          </Breadcrumb.Item>
           <Breadcrumb.Item active>study</Breadcrumb.Item>
         </Breadcrumb>
       </header>

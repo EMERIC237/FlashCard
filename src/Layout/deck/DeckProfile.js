@@ -1,12 +1,5 @@
 import React, { useState, useEffect } from "react";
-import {
-  Route,
-  Switch,
-  NavLink,
-  Link,
-  useParams,
-  useHistory,
-} from "react-router-dom";
+import { useParams, useHistory } from "react-router-dom";
 import { readDeck, deleteDeck } from "../../utils/api";
 import { Card, Breadcrumb, Button } from "react-bootstrap";
 import CardUnit from "../card/CardUnit";
@@ -39,6 +32,11 @@ function DeckProfile() {
     }
   }, [deckId]);
 
+  if (error) {
+    console.log(error);
+    return <div>NO DECK: FETCH ERROR</div>;
+  }
+
   if (!deck) {
     return <div>NO DECK FOUND</div>;
   }
@@ -67,12 +65,27 @@ function DeckProfile() {
       <div>
         <Card.Title>{deck.name}</Card.Title>
         <Card.Text>{deck.description}</Card.Text>
-        <Button variant="secondary" onClick={() => push(`/decks/${deckId}/edit`)}>Edit</Button>
-        <Button variant="primary" onClick={() => push(`/decks/${deck.id}/study`)}>Study</Button>
-        <Button variant="primary" onClick={() => push(`/decks/${deckId}/cards/new`)}>
+        <Button
+          variant="secondary"
+          onClick={() => push(`/decks/${deckId}/edit`)}
+        >
+          Edit
+        </Button>
+        <Button
+          variant="primary"
+          onClick={() => push(`/decks/${deck.id}/study`)}
+        >
+          Study
+        </Button>
+        <Button
+          variant="primary"
+          onClick={() => push(`/decks/${deckId}/cards/new`)}
+        >
           Add Cards
         </Button>
-        <Button variant="danger" onClick={deleteClickHandler}>Delete</Button>
+        <Button variant="danger" onClick={deleteClickHandler}>
+          Delete
+        </Button>
       </div>
       <h2>Cards</h2>
       {listForCards}
