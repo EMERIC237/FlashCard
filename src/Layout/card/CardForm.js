@@ -7,17 +7,20 @@ export default function CardForm({
   handleChange,
   formData,
   handleSubmit,
+  deck,
 }) {
   return (
     <div>
       <Breadcrumb>
         <Breadcrumb.Item href="/">Home</Breadcrumb.Item>
-        <Breadcrumb.Item href={`/decks/${deckId}`}>deck name</Breadcrumb.Item>
+        <Breadcrumb.Item href={`/decks/${deckId}`}>
+          {deck && deck.name}
+        </Breadcrumb.Item>
         <Breadcrumb.Item active>{action} Card</Breadcrumb.Item>
       </Breadcrumb>
       <h1>{action} Card</h1>
       <Form>
-        <Form.Group className="mb-3" controlId="front">
+        <Form.Group className="mb-3">
           <Form.Label htmlFor="front">Front</Form.Label>
           <Form.Control
             as="textarea"
@@ -29,7 +32,7 @@ export default function CardForm({
             value={formData.front}
           />
         </Form.Group>
-        <Form.Group className="mb-3" controlId="back">
+        <Form.Group className="mb-3">
           <Form.Label htmlFor="front">Back</Form.Label>
           <Form.Control
             as="textarea"

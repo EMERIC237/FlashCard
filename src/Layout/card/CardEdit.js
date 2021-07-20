@@ -36,6 +36,7 @@ function CardEdit() {
         try {
           const cardFromAPI = await readCard(cardId, signal);
           setCard(cardFromAPI);
+          setFormData(cardFromAPI);
         } catch (error) {
           if (error.name === "AbortError") {
             console.log("Aborted", error);
@@ -95,6 +96,7 @@ function CardEdit() {
         handleChange={handleChange}
         formData={formData}
         handleSubmit={handleSubmit}
+        deck={deck}
       />
     </div>
   );

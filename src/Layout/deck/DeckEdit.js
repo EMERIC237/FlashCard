@@ -13,6 +13,7 @@ function DeckEdit() {
       try {
         const deckFromAPI = await readDeck(deckId, signal);
         setDeck(deckFromAPI);
+        setFormData(deckFromAPI);
       } catch (error) {
         if (error.name === "AbortError") {
           console.log("Aborted", error);
@@ -75,6 +76,7 @@ function DeckEdit() {
         handleChange={handleChange}
         formData={formData}
         handleSubmit={handleSubmit}
+        deck={deck}
       />
     </div>
   );

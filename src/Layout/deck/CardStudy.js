@@ -4,11 +4,9 @@ import { Card, Button } from "react-bootstrap";
 function CardStudy({ card, index, lengthOfCards, handleNumber }) {
   const [flip, setFlip] = useState(false);
   const [text, setText] = useState("");
-  const [display, setDisplay] = useState("inline");
 
   useEffect(() => {
     text === card.front ? setText(card.back) : setText(card.front);
-    display === "inline" ? setDisplay("None") : setDisplay("inline");
   }, [flip]);
 
   return (
@@ -22,13 +20,11 @@ function CardStudy({ card, index, lengthOfCards, handleNumber }) {
           <Button variant="secondary" onClick={() => setFlip(!flip)}>
             flip
           </Button>
-          <Button
-            variant="primary"
-            style={{ display: display }}
-            onClick={handleNumber}
-          >
-            Next
-          </Button>
+          {flip ? (
+            <Button variant="primary" onClick={handleNumber}>
+              Next
+            </Button>
+          ) : null}
         </Card.Body>
       </Card>
     </div>

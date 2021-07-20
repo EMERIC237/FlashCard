@@ -76,6 +76,7 @@ export default function CardAdd() {
         handleChange={handleChange}
         formData={formData}
         handleSubmit={handleSave}
+        deck={deck}
       />
     </div>
   );

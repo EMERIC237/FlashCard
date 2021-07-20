@@ -5,16 +5,18 @@ export default function DeckForm({
   handleChange,
   formData,
   handleSubmit,
+  deck,
 }) {
   return (
     <div>
       <Breadcrumb>
         <Breadcrumb.Item href="/">Home</Breadcrumb.Item>
+        <Breadcrumb.Item> {deck && deck.name}</Breadcrumb.Item>
         <Breadcrumb.Item active>{action} Deck</Breadcrumb.Item>
       </Breadcrumb>
       <h1>{action} Deck</h1>
       <Form>
-        <Form.Group className="mb-3" controlId="name">
+        <Form.Group className="mb-3">
           <Form.Label>Name</Form.Label>
           <Form.Control
             id="name"
@@ -25,7 +27,7 @@ export default function DeckForm({
             value={formData.name}
           />
         </Form.Group>
-        <Form.Group className="mb-3" controlId="description">
+        <Form.Group className="mb-3">
           <Form.Label>Description</Form.Label>
           <Form.Control
             id="description"
