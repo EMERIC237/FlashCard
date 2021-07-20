@@ -44,7 +44,7 @@ function DeckProfile() {
   const deleteClickHandler = () => {
     if (
       window.confirm(
-        `Delete this deck?\n\n\You will not be able to recover it.`
+        `Delete this deck?\n\nYou will not be able to recover it.`
       )
     ) {
       deleteDeck(deck.id);

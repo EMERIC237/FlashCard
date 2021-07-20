@@ -47,7 +47,7 @@ function DeckStudy() {
       setNumber(number + 1);
     } else {
       window.confirm(
-        `Restart Cards?\n\n\Click 'cancel' to return to the home page.`
+        `Restart Cards?\n\nClick 'cancel' to return to the home page.`
       )
         ? setNumber(0)
         : push("/");
