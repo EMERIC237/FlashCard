@@ -9,17 +9,22 @@ import CardAdd from "./card/CardAdd";
 import DeckProfile from "./deck/DeckProfile";
 import DeckEdit from "./deck/DeckEdit";
 import CardEdit from "./card/CardEdit";
+import { useHistory } from "react-router";
 
 function Layout() {
+  const { push } = useHistory();
   return (
     <Fragment>
       <Header />
       <Switch>
         <Route exact path="/">
           <div className="container">
-            <button variant="secondary" href="/decks/new">
+            <button
+              onClick={() =>push("/decks/new")}
+              class="btn btn-secondary"
+            >
               Create Deck
-            </button>{" "}
+            </button>
             <DeckList />
           </div>
         </Route>
@@ -45,7 +50,7 @@ function Layout() {
           <NotFound />
         </Route>
       </Switch>
-      {/* Implement the screen starting here */}
+      {/* TODO: Implement the screen starting here */}
     </Fragment>
   );
 }

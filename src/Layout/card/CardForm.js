@@ -1,5 +1,5 @@
 import React from "react";
-import { useHistory } from "react-router";
+import { useHistory } from "react-router-dom";
 
 export default function CardForm({
   action,
@@ -9,41 +9,65 @@ export default function CardForm({
   handleSubmit,
   deck,
 }) {
+  const { push } = useHistory();
   return (
     <div>
-      <div>
-        <a href="/">Home</a>
-        <a href={`/decks/${deckId}`}>{deck && deck.name}</a>
-        <a>{action} Card</a>
-      </div>
+      <nav aria-label="breadcrumb">
+        <ol className="breadcrumb">
+          <li className="breadcrumb-item">
+            <a href="/">Home</a>
+          </li>
+          <li className="breadcrumb-item">
+            <a href={`/decks/${deckId}`}>{deck && deck.name}</a>
+          </li>
+          <li className="breadcrumb-item active" aria-current="page">
+            {action} Card
+          </li>
+        </ol>
+      </nav>
       <h1>{action} Card</h1>
-      <form>
-        <label htmlFor="front">Front</label>
-        <textarea
-          rows={2}
-          id="front"
-          name="front"
-          placeholder="Front side Card"
-          onChange={handleChange}
-          value={formData.front}
-        />
-        <label htmlFor="front">Back</label>
-        <textarea
-          rows={2}
-          id="back"
-          name="back"
-          placeholder="Back side Card"
-          onChange={handleChange}
-          value={formData.back}
-        />
+      <form className="">
+        <div className="mb-3 form-group">
+          <label className="form-label" for="front">
+            Front
+          </label>
+          <textarea
+            rows="2"
+            name="front"
+            placeholder="Front side Card"
+            id="front"
+            className="form-control"
+            onChange={handleChange}
+            value={formData.front}
+          ></textarea>
+        </div>
+        <div className="mb-3 form-group">
+          <label className="form-label" for="front">
+            Back
+          </label>
+          <textarea
+            rows="2"
+            name="back"
+            placeholder="Back side Card"
+            id="back"
+            className="form-control"
+            onChange={handleChange}
+            value={formData.back}
+          ></textarea>
+        </div>
         <button
-          onClick={() => {
-            useHistory.push(`decks/${deckId}`);
-          }}
+          onClick={() => push(`decks/${deckId}`)}
+          className="btn btn-primary"
         >
           Cancel
         </button>
-        <button onClick={handleSubmit}>Submit</button>
+        <button
+          type="button"
+          className="btn btn-primary"
+          onClick={handleSubmit}
+        >
+          Submit
+        </button>
       </form>
     </div>
   );

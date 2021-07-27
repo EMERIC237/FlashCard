@@ -65,11 +65,19 @@ function DeckStudy() {
   return (
     <div>
       <header>
-        <div>
-          <a href="/">Home</a>
-          <a href={`/decks/${deckId}`}>{deck.name}</a>
-          <a>study</a>
-        </div>
+        <nav aria-label="breadcrumb">
+          <ol class="breadcrumb">
+            <li class="breadcrumb-item">
+              <a href="/">Home</a>
+            </li>
+            <li class="breadcrumb-item">
+              <a href={"#"}>{deck.name}</a>
+            </li>
+            <li class="breadcrumb-item active" aria-current="page">
+              study
+            </li>
+          </ol>
+        </nav>
       </header>
       <h1>Study: {deck.name}</h1>
       <div>

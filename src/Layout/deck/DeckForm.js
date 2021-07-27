@@ -1,5 +1,5 @@
 import React from "react";
-import { useHistory } from "react-router";
+import { useHistory } from "react-router-dom";
 export default function DeckForm({
   action,
   handleChange,
@@ -7,41 +7,57 @@ export default function DeckForm({
   handleSubmit,
   deck,
 }) {
+  const { push } = useHistory();
   return (
     <div>
-      <div>
-        <a href="/">Home</a>
-        <a> {deck && deck.name}</a>
-        <a>{action} Deck</a>
-      </div>
+      <nav aria-label="breadcrumb">
+        <ol className="breadcrumb">
+          <li className="breadcrumb-item">
+            <a href="/">Home</a>
+          </li>
+          <li className="breadcrumb-item">
+            <a href={`decks/${deck && deck.id}`} role="button">
+              {deck && deck.name}
+            </a>
+          </li>
+          <li className="breadcrumb-item active" aria-current="page">
+            {action} Deck
+          </li>
+        </ol>
+      </nav>
       <h1>{action} Deck</h1>
-      <form>
-        <label htmlFor="name">Name</label>
-        <input
-          id="name"
-          as="input"
-          name="name"
-          placeholder="Deck name"
-          onChange={handleChange}
-          value={formData.name}
-        />
-        <label htmlFor="description">Description</label>
-        <textarea
-          id="description"
-          rows={3}
-          name="description"
-          placeholder="Brief description of the deck"
-          onChange={handleChange}
-          value={formData.description}
-        />
-        <button
-          onClick={() => {
-            useHistory.push("/");
-          }}
-        >
+      <form className="">
+        <div className="mb-3 form-group">
+          <label className="form-label">Name</label>
+          <input
+            name="name"
+            placeholder="Deck name"
+            id="name"
+            className="form-control"
+            onChange={handleChange}
+            value={formData.name}
+          ></input>
+        </div>
+        <div className="mb-3 form-group">
+          <label className="form-label">Description</label>
+          <textarea
+            rows="3"
+            name="description"
+            placeholder="Brief description of the deck"
+            id="description"
+            className="form-control"
+            onChange={handleChange}
+            value={formData.description}
+          ></textarea>
+        </div>
+        <button onClick={() => push("/")} className="btn btn-secondary">
           Cancel
         </button>
-        <button type="submit" onClick={handleSubmit}>
+        <button
+          type="submit"
+          className="btn btn-primary"
+          onClick={handleSubmit}
+        >
           Submit
         </button>
       </form>

@@ -55,19 +55,47 @@ function DeckProfile() {
 
   return (
     <div>
+      <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item">
+            <a href="/">Home</a>
+          </li>
+          <li class="breadcrumb-item active" aria-current="page">
+            {deck.name}
+          </li>
+        </ol>
+      </nav>
       <div>
-        <a href="/">Home</a>
-        <a>{deck.name}</a>
-      </div>
-      <div>
-        <h3>{deck.name}</h3>
-        <h3>{deck.description}</h3>
-        <button onClick={() => push(`/decks/${deckId}/edit`)}>Edit</button>
-        <button onClick={() => push(`/decks/${deck.id}/study`)}>Study</button>
-        <button onClick={() => push(`/decks/${deckId}/cards/new`)}>
+        <div class="card-title h5">{deck.name}</div>
+        <p class="card-text">{deck.description}</p>
+        <button
+          type="button"
+          class="btn btn-secondary"
+          onClick={() => push(`/decks/${deckId}/edit`)}
+        >
+          Edit
+        </button>
+        <button
+          type="button"
+          class="btn btn-primary"
+          onClick={() => push(`/decks/${deck.id}/study`)}
+        >
+          Study
+        </button>
+        <button
+          type="button"
+          class="btn btn-primary"
+          onClick={() => push(`/decks/${deckId}/cards/new`)}
+        >
           Add Cards
         </button>
-        <button onClick={deleteClickHandler}>Delete</button>
+        <button
+          type="button"
+          class="btn btn-danger"
+          onClick={deleteClickHandler}
+        >
+          Delete
+        </button>
       </div>
       <h2>Cards</h2>
       {listForCards}

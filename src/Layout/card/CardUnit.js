@@ -16,21 +16,26 @@ export default function CardUnit({ card, deckId }) {
   };
 
   return (
-    <div>
-      <div>
-        <div>
+    <div className="card">
+      <div className="card-body">
+        <p className="card-text">
           <span>{card.front}</span>
-          <br />
           <span>{card.back}</span>
-        </div>
+        </p>
         <button
+          type="button"
+          className="btn btn-secondary"
           onClick={() => {
             push(`/decks/${deckId}/cards/${card.id}/edit`);
           }}
         >
           Edit
         </button>
-        <button variant="danger" onClick={deleteClickHandler}>
+        <button
+          type="button"
+          className="btn btn-danger"
+          onClick={deleteClickHandler}
+        >
           Delete
         </button>
       </div>

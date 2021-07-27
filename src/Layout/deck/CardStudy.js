@@ -9,16 +9,24 @@ function CardStudy({ card, index, lengthOfCards, handleNumber }) {
   }, [flip, card]);
 
   return (
-    <div>
-      <div>
-        <div>
-          <div>
-            Card {index + 1} of {lengthOfCards}
-          </div>
-          <div>{text}</div>
-          <button onClick={() => setFlip(!flip)}>flip</button>
-          {flip ? <button onClick={handleNumber}>Next</button> : null}
+    <div className="card">
+      <div className="card-body">
+        <div className="card-title h5">
+          Card {index + 1} of {lengthOfCards}
         </div>
+        <p className="card-text">{text}</p>
+        <button
+          type="button"
+          className="btn btn-secondary"
+          onClick={() => setFlip(!flip)}
+        >
+          flip
+        </button>
+        {flip ? (
+          <button type="button" className="btn btn-primary" onClick={handleNumber}>
+            Next
+          </button>
+        ) : null}
       </div>
     </div>
   );
