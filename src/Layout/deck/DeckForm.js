@@ -1,5 +1,5 @@
 import React from "react";
-import { Breadcrumb, Form, Button } from "react-bootstrap";
+import { useHistory } from "react-router";
 export default function DeckForm({
   action,
   handleChange,
@@ -9,43 +9,42 @@ export default function DeckForm({
 }) {
   return (
     <div>
-      <Breadcrumb>
-        <Breadcrumb.Item href="/">Home</Breadcrumb.Item>
-        <Breadcrumb.Item> {deck && deck.name}</Breadcrumb.Item>
-        <Breadcrumb.Item active>{action} Deck</Breadcrumb.Item>
-      </Breadcrumb>
+      <div>
+        <a href="/">Home</a>
+        <a> {deck && deck.name}</a>
+        <a>{action} Deck</a>
+      </div>
       <h1>{action} Deck</h1>
-      <Form>
-        <Form.Group className="mb-3">
-          <Form.Label>Name</Form.Label>
-          <Form.Control
-            id="name"
-            as="input"
-            name="name"
-            placeholder="Deck name"
-            onChange={handleChange}
-            value={formData.name}
-          />
-        </Form.Group>
-        <Form.Group className="mb-3">
-          <Form.Label>Description</Form.Label>
-          <Form.Control
-            id="description"
-            as="textarea"
-            rows={3}
-            name="description"
-            placeholder="Brief description of the deck"
-            onChange={handleChange}
-            value={formData.description}
-          />
-        </Form.Group>
-        <Button variant="secondary" href={"/"}>
+      <form>
+        <label htmlFor="name">Name</label>
+        <input
+          id="name"
+          as="input"
+          name="name"
+          placeholder="Deck name"
+          onChange={handleChange}
+          value={formData.name}
+        />
+        <label htmlFor="description">Description</label>
+        <textarea
+          id="description"
+          rows={3}
+          name="description"
+          placeholder="Brief description of the deck"
+          onChange={handleChange}
+          value={formData.description}
+        />
+        <button
+          onClick={() => {
+            useHistory.push("/");
+          }}
+        >
           Cancel
-        </Button>
-        <Button variant="primary" type="submit" onClick={handleSubmit}>
+        </button>
+        <button type="submit" onClick={handleSubmit}>
           Submit
-        </Button>
-      </Form>
+        </button>
+      </form>
     </div>
   );
 }

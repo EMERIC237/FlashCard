@@ -2,7 +2,6 @@ import { useHistory, useParams } from "react-router-dom";
 import React, { useState, useEffect } from "react";
 import { readDeck } from "../../utils/api";
 import CardStudy from "./CardStudy";
-import { Breadcrumb, Button } from "react-bootstrap";
 
 function DeckStudy() {
   const { deckId } = useParams();
@@ -66,13 +65,11 @@ function DeckStudy() {
   return (
     <div>
       <header>
-        <Breadcrumb>
-          <Breadcrumb.Item href="/">Home</Breadcrumb.Item>
-          <Breadcrumb.Item href={`/decks/${deckId}`}>
-            {deck.name}
-          </Breadcrumb.Item>
-          <Breadcrumb.Item active>study</Breadcrumb.Item>
-        </Breadcrumb>
+        <div>
+          <a href="/">Home</a>
+          <a href={`/decks/${deckId}`}>{deck.name}</a>
+          <a>study</a>
+        </div>
       </header>
       <h1>Study: {deck.name}</h1>
       <div>
@@ -85,9 +82,9 @@ function DeckStudy() {
               You need at least 3 cards to study. There are {listCards.length}{" "}
               cards in this deck.
             </p>
-            <Button onClick={() => push(`/decks/${deckId}/cards/new`)}>
+            <button onClick={() => push(`/decks/${deckId}/cards/new`)}>
               Add Cards
-            </Button>
+            </button>
           </div>
         )}
       </div>

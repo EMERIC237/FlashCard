@@ -1,6 +1,6 @@
 import React from "react";
 import { deleteDeck } from "../../utils/api";
-import { Card, Button } from "react-bootstrap";
+
 export default function Deck({ deck }) {
   const deleteClickHandler = () => {
     if (
@@ -13,24 +13,24 @@ export default function Deck({ deck }) {
 
   return (
     <div>
-      <Card>
-        <Card.Body>
-          <Card.Title>
+      <div>
+        <div>
+          <div>
             {deck.name}
             <span> {deck.cards.length} cards</span>
-          </Card.Title>
-          <Card.Text>{deck.description}</Card.Text>
-          <Button variant="secondary" href={`/decks/${deck.id}`}>
+          </div>
+          <div>{deck.description}</div>
+          <button variant="secondary" href={`/decks/${deck.id}`}>
             View
-          </Button>
-          <Button variant="primary" href={`/decks/${deck.id}/study`}>
+          </button>
+          <button variant="primary" href={`/decks/${deck.id}/study`}>
             Study
-          </Button>
-          <Button variant="danger" onClick={deleteClickHandler}>
+          </button>
+          <button variant="danger" onClick={deleteClickHandler}>
             Delete
-          </Button>
-        </Card.Body>
-      </Card>
+          </button>
+        </div>
+      </div>
     </div>
   );
 }

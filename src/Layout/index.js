@@ -9,7 +9,6 @@ import CardAdd from "./card/CardAdd";
 import DeckProfile from "./deck/DeckProfile";
 import DeckEdit from "./deck/DeckEdit";
 import CardEdit from "./card/CardEdit";
-import Button from "react-bootstrap/Button";
 
 function Layout() {
   return (
@@ -18,9 +17,9 @@ function Layout() {
       <Switch>
         <Route exact path="/">
           <div className="container">
-            <Button variant="secondary" href="/decks/new">
+            <button variant="secondary" href="/decks/new">
               Create Deck
-            </Button>{" "}
+            </button>{" "}
             <DeckList />
           </div>
         </Route>
@@ -46,7 +45,7 @@ function Layout() {
           <NotFound />
         </Route>
       </Switch>
-      {/* TODO: Implement the screen starting here */}
+      {/* Implement the screen starting here */}
     </Fragment>
   );
 }

@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useParams, useHistory } from "react-router-dom";
 import { readDeck, deleteDeck } from "../../utils/api";
-import { Card, Breadcrumb, Button } from "react-bootstrap";
 import CardUnit from "../card/CardUnit";
 
 function DeckProfile() {
@@ -43,9 +42,7 @@ function DeckProfile() {
 
   const deleteClickHandler = () => {
     if (
-      window.confirm(
-        `Delete this deck?\n\nYou will not be able to recover it.`
-      )
+      window.confirm(`Delete this deck?\n\nYou will not be able to recover it.`)
     ) {
       deleteDeck(deck.id);
       push("/");
@@ -58,34 +55,19 @@ function DeckProfile() {
 
   return (
     <div>
-      <Breadcrumb>
-        <Breadcrumb.Item href="/">Home</Breadcrumb.Item>
-        <Breadcrumb.Item active>{deck.name}</Breadcrumb.Item>
-      </Breadcrumb>
       <div>
-        <Card.Title>{deck.name}</Card.Title>
-        <Card.Text>{deck.description}</Card.Text>
-        <Button
-          variant="secondary"
-          onClick={() => push(`/decks/${deckId}/edit`)}
-        >
-          Edit
-        </Button>
-        <Button
-          variant="primary"
-          onClick={() => push(`/decks/${deck.id}/study`)}
-        >
-          Study
-        </Button>
-        <Button
-          variant="primary"
-          onClick={() => push(`/decks/${deckId}/cards/new`)}
-        >
+        <a href="/">Home</a>
+        <a>{deck.name}</a>
+      </div>
+      <div>
+        <h3>{deck.name}</h3>
+        <h3>{deck.description}</h3>
+        <button onClick={() => push(`/decks/${deckId}/edit`)}>Edit</button>
+        <button onClick={() => push(`/decks/${deck.id}/study`)}>Study</button>
+        <button onClick={() => push(`/decks/${deckId}/cards/new`)}>
           Add Cards
-        </Button>
-        <Button variant="danger" onClick={deleteClickHandler}>
-          Delete
-        </Button>
+        </button>
+        <button onClick={deleteClickHandler}>Delete</button>
       </div>
       <h2>Cards</h2>
       {listForCards}

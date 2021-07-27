@@ -1,5 +1,5 @@
 import React from "react";
-import { Breadcrumb, Form, Button } from "react-bootstrap";
+import { useHistory } from "react-router";
 
 export default function CardForm({
   action,
@@ -11,42 +11,40 @@ export default function CardForm({
 }) {
   return (
     <div>
-      <Breadcrumb>
-        <Breadcrumb.Item href="/">Home</Breadcrumb.Item>
-        <Breadcrumb.Item href={`/decks/${deckId}`}>
-          {deck && deck.name}
-        </Breadcrumb.Item>
-        <Breadcrumb.Item active>{action} Card</Breadcrumb.Item>
-      </Breadcrumb>
+      <div>
+        <a href="/">Home</a>
+        <a href={`/decks/${deckId}`}>{deck && deck.name}</a>
+        <a>{action} Card</a>
+      </div>
       <h1>{action} Card</h1>
-      <Form>
-        <Form.Group className="mb-3">
-          <Form.Label htmlFor="front">Front</Form.Label>
-          <Form.Control
-            as="textarea"
-            rows={2}
-            id="front"
-            name="front"
-            placeholder="Front side Card"
-            onChange={handleChange}
-            value={formData.front}
-          />
-        </Form.Group>
-        <Form.Group className="mb-3">
-          <Form.Label htmlFor="front">Back</Form.Label>
-          <Form.Control
-            as="textarea"
-            rows={2}
-            id="back"
-            name="back"
-            placeholder="Back side Card"
-            onChange={handleChange}
-            value={formData.back}
-          />
-        </Form.Group>
-        <Button href={`decks/${deckId}`}>Cancel</Button>
-        <Button onClick={handleSubmit}>Submit</Button>
-      </Form>
+      <form>
+        <label htmlFor="front">Front</label>
+        <textarea
+          rows={2}
+          id="front"
+          name="front"
+          placeholder="Front side Card"
+          onChange={handleChange}
+          value={formData.front}
+        />
+        <label htmlFor="front">Back</label>
+        <textarea
+          rows={2}
+          id="back"
+          name="back"
+          placeholder="Back side Card"
+          onChange={handleChange}
+          value={formData.back}
+        />
+        <button
+          onClick={() => {
+            useHistory.push(`decks/${deckId}`);
+          }}
+        >
+          Cancel
+        </button>
+        <button onClick={handleSubmit}>Submit</button>
+      </form>
     </div>
   );
 }
