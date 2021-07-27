@@ -1,0 +1,10 @@
+button {
+    margin: 0px 5px;
+}
+
+.divButton {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+

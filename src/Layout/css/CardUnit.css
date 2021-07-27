@@ -1,0 +1,10 @@
+.cardText{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.buttons{
+    display: flex;
+    justify-content: flex-end;
+}
