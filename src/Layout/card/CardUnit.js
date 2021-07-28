@@ -1,6 +1,6 @@
 import React from "react";
 import { useHistory } from "react-router-dom";
-import { deleteCard } from "../../utils/api";
+import { deleteCard } from "../../utils/api/index";
 // import "../css/CardUnit.css"
 
 export default function CardUnit({ card, deckId }) {

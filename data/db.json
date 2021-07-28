@@ -6,9 +6,9 @@
       "id": 2
     },
     {
-      "name": "hy",
-      "description": "hello",
-      "id": 3
+      "name": "New Deck created today",
+      "description": "This deck will be use to learn tags in react",
+      "id": 4
     }
   ],
   "cards": [
@@ -19,22 +19,28 @@
       "id": 5
     },
     {
-      "front": "What tag replace if statement in REACT",
-      "back": "<WHEN/>",
-      "deckId": 3,
-      "id": 8
+      "front": "create",
+      "back": "create",
+      "deckId": 4,
+      "id": 17
     },
     {
-      "front": "True or false",
-      "back": "false",
-      "deckId": 3,
-      "id": 9
+      "front": "edit",
+      "back": "edit",
+      "deckId": 4,
+      "id": 18
     },
     {
-      "front": "emeric",
-      "back": "hola",
-      "deckId": 3,
-      "id": 10
+      "front": "update",
+      "back": "update",
+      "deckId": 4,
+      "id": 19
+    },
+    {
+      "front": "delete",
+      "back": "delete",
+      "deckId": 4,
+      "id": 20
     }
   ]
 }

@@ -1,5 +1,7 @@
 import React, { useState } from "react";
-import { createDeck } from "../../utils/api";
+import { Link } from 'react-router-dom'
+
+import { createDeck } from "../../utils/api/index";
 import DeckForm from "./DeckForm";
 
 export default function CreateDeck() {
@@ -48,12 +50,28 @@ export default function CreateDeck() {
   }
   return (
     <div>
-      <DeckForm
-        action={"Create"}
-        handleChange={handleChange}
-        formData={formData}
-        handleSubmit={handleSubmit}
-      />
+      <nav aria-label="breadcrumb">
+        <ol className="breadcrumb">
+          <li className="breadcrumb-item" key="0">
+            <Link to="/">Home</Link>
+          </li>
+          <li className="breadcrumb-item active" aria-current="page" key="1">
+            Create Deck
+          </li>
+        </ol>
+      </nav>
+      <br />
+      <h2>Create Deck</h2>
+      <form onSubmit={handleSubmit}>
+        <DeckForm formData={formData} handleChange={handleChange} />
+        <Link to="/" className="btn btn-secondary">
+          Cancel
+        </Link>{" "}
+        &nbsp;
+        <button type="submit" className="btn btn-primary">
+          Save
+        </button>
+      </form>
     </div>
   );
 }
