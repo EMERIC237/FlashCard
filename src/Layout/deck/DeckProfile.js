@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useParams, useHistory } from "react-router-dom";
 import { readDeck, deleteDeck } from "../../utils/api";
 import CardUnit from "../card/CardUnit";
+import "../css/DeckProfile.css"
 
 function DeckProfile() {
   const { deckId } = useParams();
@@ -56,46 +57,52 @@ function DeckProfile() {
   return (
     <div>
       <nav aria-label="breadcrumb">
-        <ol class="breadcrumb">
-          <li class="breadcrumb-item">
+        <ul className="breadcrumb">
+          <li className="breadcrumb-item">
             <a href="/">Home</a>
           </li>
-          <li class="breadcrumb-item active" aria-current="page">
+          <li className="breadcrumb-item active" aria-current="page">
             {deck.name}
           </li>
-        </ol>
+        </ul>
       </nav>
       <div>
-        <div class="card-title h5">{deck.name}</div>
-        <p class="card-text">{deck.description}</p>
-        <button
-          type="button"
-          class="btn btn-secondary"
-          onClick={() => push(`/decks/${deckId}/edit`)}
-        >
-          Edit
-        </button>
-        <button
-          type="button"
-          class="btn btn-primary"
-          onClick={() => push(`/decks/${deck.id}/study`)}
-        >
-          Study
-        </button>
-        <button
-          type="button"
-          class="btn btn-primary"
-          onClick={() => push(`/decks/${deckId}/cards/new`)}
-        >
-          Add Cards
-        </button>
-        <button
-          type="button"
-          class="btn btn-danger"
-          onClick={deleteClickHandler}
-        >
-          Delete
-        </button>
+        <div className="card-title h5">{deck.name}</div>
+        <div className="card-text">{deck.description}</div>
+        <div className="divButton">
+          <div>
+            <button
+              type="button"
+              className="btn btn-secondary"
+              onClick={() => push(`/decks/${deckId}/edit`)}
+            >
+              Edit
+            </button>
+            <button
+              type="button"
+              className="btn btn-primary"
+              onClick={() => push(`/decks/${deck.id}/study`)}
+            >
+              Study
+            </button>
+            <button
+              type="button"
+              className="btn btn-primary"
+              onClick={() => push(`/decks/${deckId}/cards/new`)}
+            >
+              Add Cards
+            </button>
+          </div>
+          <div>
+            <button
+              type="button"
+              className="btn btn-danger"
+              onClick={deleteClickHandler}
+            >
+              Delete
+            </button>
+          </div>
+        </div>
       </div>
       <h2>Cards</h2>
       {listForCards}

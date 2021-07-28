@@ -1,6 +1,8 @@
 import React from "react";
 import { deleteDeck } from "../../utils/api";
 import { useHistory } from "react-router-dom";
+import "../css/Deck.css";
+
 export default function Deck({ deck }) {
   const deleteClickHandler = () => {
     if (
@@ -13,32 +15,38 @@ export default function Deck({ deck }) {
   const { push } = useHistory();
 
   return (
-    <div class="card">
-      <div class="card-body">
-        <div class="card-title h5">
-          {deck.name}
+    <div className="card">
+      <div className="card-body">
+        <div className="card-title h5 divButton">
+          <span>{deck.name}</span>
           <span> {deck.cards.length} cards</span>
         </div>
-        <p class="card-text">{deck.description}</p>
-        <button
-          onClick={() => push(`/decks/${deck.id}`)}
-          class="btn btn-secondary"
-        >
-          View
-        </button>
-        <button
-          onClick={() => push(`/decks/${deck.id}/study`)}
-          class="btn btn-primary"
-        >
-          Study
-        </button>
-        <button
-          type="button"
-          class="btn btn-danger"
-          onClick={deleteClickHandler}
-        >
-          Delete
-        </button>
+        <p className="card-text">{deck.description}</p>
+        <div className="divButton">
+          <div>
+            <button
+              onClick={() => push(`/decks/${deck.id}`)}
+              className="btn btn-secondary"
+            >
+              View
+            </button>
+            <button
+              onClick={() => push(`/decks/${deck.id}/study`)}
+              className="btn btn-primary"
+            >
+              Study
+            </button>
+          </div>
+          <div>
+            <button
+              type="button"
+              className="btn btn-danger"
+              onClick={deleteClickHandler}
+            >
+              Delete
+            </button>
+          </div>
+        </div>
       </div>
     </div>
   );

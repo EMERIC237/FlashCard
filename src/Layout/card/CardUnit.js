@@ -1,6 +1,7 @@
 import React from "react";
 import { useHistory } from "react-router-dom";
 import { deleteCard } from "../../utils/api";
+// import "../css/CardUnit.css"
 
 export default function CardUnit({ card, deckId }) {
   const { push } = useHistory();
@@ -18,10 +19,11 @@ export default function CardUnit({ card, deckId }) {
   return (
     <div className="card">
       <div className="card-body">
-        <p className="card-text">
+        <div className="card-text cardText">
           <span>{card.front}</span>
           <span>{card.back}</span>
-        </p>
+        </div>
+        <div className="buttons">
         <button
           type="button"
           className="btn btn-secondary"
@@ -38,6 +40,7 @@ export default function CardUnit({ card, deckId }) {
         >
           Delete
         </button>
+        </div>
       </div>
     </div>
   );
