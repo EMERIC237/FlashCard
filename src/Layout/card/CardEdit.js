@@ -8,7 +8,6 @@ function CardEdit() {
   const history = useHistory();
   const [deck, setDeck] = useState(null);
   const [card, setCard] = useState({ front: "", back: "" });
-  const [error, setError] = useState(null);
 
   useEffect(() => {
     readDeck(deckId).then(setDeck);

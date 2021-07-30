@@ -23,7 +23,11 @@ function CardStudy({ card, index, lengthOfCards, handleNumber }) {
           flip
         </button>
         {flip ? (
-          <button type="button" className="btn btn-primary" onClick={handleNumber}>
+          <button
+            type="button"
+            className="btn btn-primary"
+            onClick={handleNumber}
+          >
             Next
           </button>
         ) : null}
