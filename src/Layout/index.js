@@ -1,4 +1,4 @@
-import React, { Fragment } from "react";
+import React, { Fragment, useState } from "react";
 import { Route, Switch } from "react-router-dom";
 import Header from "./Header";
 import NotFound from "./NotFound";
@@ -12,6 +12,7 @@ import CardEdit from "./card/CardEdit";
 import { useHistory } from "react-router";
 
 function Layout() {
+  const [decks, setDecks] = useState([]);
   const { push } = useHistory();
   return (
     <Fragment>
@@ -20,16 +21,16 @@ function Layout() {
         <Route exact path="/">
           <div className="container">
             <button
-              onClick={() =>push("/decks/new")}
+              onClick={() => push("/decks/new")}
               class="btn btn-secondary"
             >
               Create Deck
             </button>
-            <DeckList />
+            <DeckList decks={decks} setDecks={setDecks} />
           </div>
         </Route>
         <Route path="/decks/new">
-          <CreateDeck />
+          <CreateDeck decks={decks} setDecks={setDecks}/>
         </Route>
         <Route path="/decks/:deckId/cards/new">
           <CardAdd />
@@ -44,7 +45,7 @@ function Layout() {
           <DeckStudy />
         </Route>
         <Route path="/decks/:deckId">
-          <DeckProfile />
+          <DeckProfile decks={decks} setDecks={setDecks}/>
         </Route>
         <Route>
           <NotFound />

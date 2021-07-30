@@ -2,11 +2,11 @@ import React, { useState, useEffect } from "react";
 import { useParams, useHistory } from "react-router-dom";
 import { readDeck, deleteDeck } from "../../utils/api";
 import CardUnit from "../card/CardUnit";
-import "../css/DeckProfile.css"
 
-function DeckProfile() {
+function DeckProfile({ decks, setDecks }) {
   const { deckId } = useParams();
   const [deck, setDeck] = useState(null);
+  const [cards, setCards] = useState([]);
   const [error, setError] = useState(null);
   const { push } = useHistory();
 
@@ -14,7 +14,9 @@ function DeckProfile() {
     async function getDeck(deckId, signal) {
       try {
         const deckFromAPI = await readDeck(deckId, signal);
+        console.log(deckFromAPI);
         setDeck(deckFromAPI);
+        setCards(deckFromAPI.cards);
       } catch (error) {
         if (error.name === "AbortError") {
           console.log("Aborted", error);
@@ -45,49 +47,75 @@ function DeckProfile() {
     if (
       window.confirm(`Delete this deck?\n\nYou will not be able to recover it.`)
     ) {
-      deleteDeck(deck.id);
-      push("/");
+      async function toDeleteDeck(deckId, signal) {
+        try {
+          await deleteDeck(deckId, signal);
+        } catch (error) {
+          if (error.name === "AbortError") {
+            console.log("Aborted", error);
+          } else {
+            setError(error);
+          }
+        }
+      }
+      if (deck.id) {
+        const deckId = deck.id;
+        const abortController = new AbortController();
+        const newDecks = decks.filter((deck) => deck.id !== deckId);
+        toDeleteDeck(deckId, abortController.signal);
+        setDecks(newDecks);
+        push("/");
+        return () => {
+          abortController.abort();
+        };
+      }
     }
   };
 
-  const listForCards = deck.cards.map((card) => (
-    <CardUnit key={card.id} card={card} deckId={deckId} />
+  const listForCards = cards.map((card) => (
+    <CardUnit
+      key={card.id}
+      card={card}
+      deckId={deckId}
+      setCards={setCards}
+      cards={cards}
+    />
   ));
 
   return (
     <div>
       <nav aria-label="breadcrumb">
-        <ul className="breadcrumb">
-          <li className="breadcrumb-item">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item">
             <a href="/">Home</a>
           </li>
-          <li className="breadcrumb-item active" aria-current="page">
+          <li class="breadcrumb-item active" aria-current="page">
             {deck.name}
           </li>
-        </ul>
+        </ol>
       </nav>
-      <div>
-        <div className="card-title h5">{deck.name}</div>
-        <div className="card-text">{deck.description}</div>
-        <div className="divButton">
+      <div class="mb-5">
+        <div class="card-title h5">{deck.name}</div>
+        <p class="card-text">{deck.description}</p>
+        <div class="d-flex justify-content-between">
           <div>
             <button
               type="button"
-              className="btn btn-secondary"
+              class="btn btn-secondary mr-2"
               onClick={() => push(`/decks/${deckId}/edit`)}
             >
               Edit
             </button>
             <button
               type="button"
-              className="btn btn-primary"
+              class="btn btn-primary mr-2"
               onClick={() => push(`/decks/${deck.id}/study`)}
             >
               Study
             </button>
             <button
               type="button"
-              className="btn btn-primary"
+              class="btn btn-primary mr-2"
               onClick={() => push(`/decks/${deckId}/cards/new`)}
             >
               Add Cards
@@ -96,7 +124,7 @@ function DeckProfile() {
           <div>
             <button
               type="button"
-              className="btn btn-danger"
+              class="btn btn-danger mr-5"
               onClick={deleteClickHandler}
             >
               Delete

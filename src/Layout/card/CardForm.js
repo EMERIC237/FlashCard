@@ -1,74 +1,65 @@
-import React from "react";
-import { useHistory } from "react-router-dom";
+import React, { useState } from 'react';
 
 export default function CardForm({
-  action,
-  deckId,
-  handleChange,
-  formData,
-  handleSubmit,
-  deck,
+  onSubmit,
+  onCancel,
+  initialState = { front: "", back: "" },
 }) {
-  const { push } = useHistory();
+  const [card, setCard] = useState(initialState);
+
+  function changeHandler({ target: { name, value } }) {
+    setCard((prevState) => ({
+      ...prevState,
+      [name]: value,
+    }));
+  }
+
+  function submitHandler(event) {
+    event.preventDefault();
+    event.stopPropagation();//What does this do
+    onSubmit(card);
+  }
+
   return (
-    <div>
-      <nav aria-label="breadcrumb">
-        <ol className="breadcrumb">
-          <li className="breadcrumb-item">
-            <a href="/">Home</a>
-          </li>
-          <li className="breadcrumb-item">
-            <a href={`/decks/${deckId}`}>{deck && deck.name}</a>
-          </li>
-          <li className="breadcrumb-item active" aria-current="page">
-            {action} Card
-          </li>
-        </ol>
-      </nav>
-      <h1>{action} Card</h1>
-      <form className="">
-        <div className="mb-3 form-group">
-          <label className="form-label" for="front">
-            Front
-          </label>
-          <textarea
-            rows="2"
-            name="front"
-            placeholder="Front side Card"
-            id="front"
-            className="form-control"
-            onChange={handleChange}
-            value={formData.front}
-          ></textarea>
-        </div>
-        <div className="mb-3 form-group">
-          <label className="form-label" for="front">
-            Back
-          </label>
-          <textarea
-            rows="2"
-            name="back"
-            placeholder="Back side Card"
-            id="back"
-            className="form-control"
-            onChange={handleChange}
-            value={formData.back}
-          ></textarea>
-        </div>
-        <button
-          onClick={() => push(`decks/${deckId}`)}
-          className="btn btn-primary"
-        >
-          Cancel
-        </button>
-        <button
-          type="button"
-          className="btn btn-primary"
-          onClick={handleSubmit}
-        >
-          Submit
-        </button>
+    <>
+      <form onSubmit={submitHandler} className="card-edit">
+        <fieldset>
+          <div className="form-group">
+            <label htmlFor="front">front</label>
+            <textarea
+              id="front"
+              name="front"
+              className="form-control"
+              value={card.front}
+              required={true}
+              placeholder="card's Question"
+              onChange={changeHandler}
+            />
+          </div>
+          <div className="form-group">
+          <label htmlFor="back">back</label>
+            <textarea
+              id="back"
+              name="back"
+              className="form-control"
+              value={card.back}
+              required={true}
+              placeholder="card's Answer"
+              onChange={changeHandler}
+            />
+          </div>
+          <button
+            type="button"
+            className="btn btn-secondary mr-2"
+            onClick={onCancel}
+          >
+            Cancel
+          </button>
+          <button type="submit" className="btn btn-primary">
+            Submit
+          </button>
+        </fieldset>
       </form>
-    </div>
+    </>
   );
 }
