@@ -8,6 +8,8 @@ export default function CardUnit({
   setCards,
   setError,
   cards,
+  deck,
+  setDeck,
 }) {
   const history = useHistory();
   const deleteClickHandler = () => {
@@ -19,6 +21,8 @@ export default function CardUnit({
       async function toDeleteCard(cardId, signal) {
         try {
           await deleteCard(cardId, signal);
+          setCards(cards.filter((card) => card.id !== cardId));
+          setDeck({...deck})
         } catch (error) {
           if (error.name === "AbortError") {
             console.log("Aborted", error);
@@ -30,9 +34,7 @@ export default function CardUnit({
       if (card.id) {
         const cardId = card.id;
         const abortController = new AbortController();
-        const newCards = cards.filter((card) => card.id !== cardId);
         toDeleteCard(cardId, abortController.signal);
-        setCards(newCards)
         window.location.reload();
         return () => {
           abortController.abort();

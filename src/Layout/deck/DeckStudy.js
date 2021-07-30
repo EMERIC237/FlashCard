@@ -1,4 +1,4 @@
-import { useHistory, useParams } from "react-router-dom";
+import { useHistory, useParams, Link } from "react-router-dom";
 import React, { useState, useEffect } from "react";
 import { readDeck } from "../../utils/api";
 import CardStudy from "./CardStudy";
@@ -70,9 +70,9 @@ function DeckStudy() {
             <li class="breadcrumb-item">
               <a href="/">Home</a>
             </li>
-            <li class="breadcrumb-item">
-              <a href={"#"}>{deck.name}</a>
-            </li>
+            <li className="breadcrumb-item">
+            <Link to={`/decks/${deckId}`}>{deck.name}</Link>
+          </li>
             <li class="breadcrumb-item active" aria-current="page">
               study
             </li>

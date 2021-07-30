@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useParams, useHistory } from "react-router-dom";
-import { readDeck, deleteDeck } from "../../utils/api";
+import { readDeck, deleteDeck, listCards } from "../../utils/api";
 import CardUnit from "../card/CardUnit";
 
 function DeckProfile({ decks, setDecks }) {
@@ -14,7 +14,7 @@ function DeckProfile({ decks, setDecks }) {
     async function getDeck(deckId, signal) {
       try {
         const deckFromAPI = await readDeck(deckId, signal);
-        console.log(deckFromAPI);
+        const cardFromAPI = await listCards(deckId, signal);
         setDeck(deckFromAPI);
         setCards(deckFromAPI.cards);
       } catch (error) {
@@ -79,6 +79,8 @@ function DeckProfile({ decks, setDecks }) {
       deckId={deckId}
       setCards={setCards}
       cards={cards}
+      deck={deck}
+      setDeck={setDecks}
     />
   ));
 
