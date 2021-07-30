@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useParams, useHistory } from "react-router-dom";
 import { readDeck, deleteDeck, listCards } from "../../utils/api";
+import { deleteClickHandler } from "../home/Helper";
 import CardUnit from "../card/CardUnit";
 
 function DeckProfile({ decks, setDecks }) {
@@ -42,35 +43,6 @@ function DeckProfile({ decks, setDecks }) {
   if (!deck) {
     return <div>NO DECK FOUND</div>;
   }
-
-  const deleteClickHandler = () => {
-    if (
-      window.confirm(`Delete this deck?\n\nYou will not be able to recover it.`)
-    ) {
-      async function toDeleteDeck(deckId, signal) {
-        try {
-          await deleteDeck(deckId, signal);
-        } catch (error) {
-          if (error.name === "AbortError") {
-            console.log("Aborted", error);
-          } else {
-            setError(error);
-          }
-        }
-      }
-      if (deck.id) {
-        const deckId = deck.id;
-        const abortController = new AbortController();
-        const newDecks = decks.filter((deck) => deck.id !== deckId);
-        toDeleteDeck(deckId, abortController.signal);
-        setDecks(newDecks);
-        push("/");
-        return () => {
-          abortController.abort();
-        };
-      }
-    }
-  };
 
   const listForCards = cards.map((card) => (
     <CardUnit
@@ -127,7 +99,9 @@ function DeckProfile({ decks, setDecks }) {
             <button
               type="button"
               className="btn btn-danger mr-5"
-              onClick={deleteClickHandler}
+              onClick={() => {
+                deleteClickHandler(setError, deck, decks, setDecks, push);
+              }}
             >
               Delete
             </button>

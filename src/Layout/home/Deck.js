@@ -1,37 +1,9 @@
 import React from "react";
-import { deleteDeck } from "../../utils/api/index";
+import { deleteClickHandler } from "./Helper";
 import { useHistory } from "react-router-dom";
 
 export default function Deck({ deck, setError, decks, setDecks }) {
-  const history = useHistory();
-  const deleteClickHandler = () => {
-    if (
-      window.confirm(`Delete this deck?\n\nYou will not be able to recover it.`)
-    ) {
-      async function toDeleteDeck(deckId, signal) {
-        try {
-          await deleteDeck(deckId, signal);
-        } catch (error) {
-          if (error.name === "AbortError") {
-            console.log("Aborted", error);
-          } else {
-            setError(error);
-          }
-        }
-      }
-      if (deck.id) {
-        const deckId = deck.id;
-        const abortController = new AbortController();
-        const newDecks = decks.filter((deck) => deck.id !== deckId);
-        toDeleteDeck(deckId, abortController.signal);
-        setDecks(newDecks);
-        history.push("/");
-        return () => {
-          abortController.abort();
-        };
-      }
-    }
-  };
+  const { push } = useHistory();
 
   const buttonStyle = {
     margin: "0px 5px",
@@ -54,14 +26,14 @@ export default function Deck({ deck, setError, decks, setDecks }) {
         <div style={divStyle}>
           <div>
             <button
-              onClick={() => history.push(`/decks/${deck.id}`)}
+              onClick={() => push(`/decks/${deck.id}`)}
               className="btn btn-secondary"
               style={buttonStyle}
             >
               View
             </button>
             <button
-              onClick={() => history.push(`/decks/${deck.id}/study`)}
+              onClick={() => push(`/decks/${deck.id}/study`)}
               className="btn btn-primary"
               style={buttonStyle}
             >
@@ -72,8 +44,10 @@ export default function Deck({ deck, setError, decks, setDecks }) {
             <button
               type="button"
               className="btn btn-danger"
-              onClick={deleteClickHandler}
               style={buttonStyle}
+              onClick={() => {
+                deleteClickHandler(setError, deck, decks, setDecks, push);
+              }}
             >
               Delete
             </button>
