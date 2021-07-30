@@ -2,13 +2,7 @@ import React from "react";
 import { deleteDeck } from "../../utils/api/index";
 import { useHistory } from "react-router-dom";
 
-export default function Deck({
-  deck,
-  setError,
-  decks,
-  setDecks,
-  profile = false,
-}) {
+export default function Deck({ deck, setError, decks, setDecks }) {
   const history = useHistory();
   const deleteClickHandler = () => {
     if (
@@ -59,24 +53,13 @@ export default function Deck({
         <p className="card-text">{deck.description}</p>
         <div style={divStyle}>
           <div>
-            {profile ? (
-              <button
-                type="button"
-                class="btn btn-secondary"
-                onClick={() => history.push(`/decks/${deck.id}/edit`)}
-              >
-                Edit
-              </button>
-            ) : (
-              <button
-                onClick={() => history.push(`/decks/${deck.id}`)}
-                className="btn btn-secondary"
-                style={buttonStyle}
-              >
-                View
-              </button>
-            )}
-
+            <button
+              onClick={() => history.push(`/decks/${deck.id}`)}
+              className="btn btn-secondary"
+              style={buttonStyle}
+            >
+              View
+            </button>
             <button
               onClick={() => history.push(`/decks/${deck.id}/study`)}
               className="btn btn-primary"
@@ -84,16 +67,6 @@ export default function Deck({
             >
               Study
             </button>
-            {profile ? (
-              <button
-                type="button"
-                className="btn btn-primary"
-                style={buttonStyle}
-                onClick={() => history.push(`/decks/${deck.id}/cards/new`)}
-              >
-                Add Cards
-              </button>
-            ) : null}
           </div>
           <div>
             <button
