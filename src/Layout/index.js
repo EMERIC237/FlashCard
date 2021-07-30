@@ -22,7 +22,7 @@ function Layout() {
           <div className="container">
             <button
               onClick={() => push("/decks/new")}
-              class="btn btn-secondary"
+              className="btn btn-secondary mb-2"
             >
               Create Deck
             </button>

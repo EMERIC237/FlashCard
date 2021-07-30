@@ -48,8 +48,8 @@ export default function CardUnit({
     <div className="card">
       <div className="card-body">
         <div className="card-text d-flex justify-content-between">
-          <p class="text-start">{card.front}</p>
-          <p class="text-end">{card.back}</p>
+          <p className ="text-start">{card.front}</p>
+          <p className="text-end">{card.back}</p>
         </div>
         <div className="d-flex justify-content-end">
         <button

@@ -87,37 +87,37 @@ function DeckProfile({ decks, setDecks }) {
   return (
     <div>
       <nav aria-label="breadcrumb">
-        <ol class="breadcrumb">
-          <li class="breadcrumb-item">
+        <ol className="breadcrumb">
+          <li className="breadcrumb-item">
             <a href="/">Home</a>
           </li>
-          <li class="breadcrumb-item active" aria-current="page">
+          <li className="breadcrumb-item active" aria-current="page">
             {deck.name}
           </li>
         </ol>
       </nav>
-      <div class="mb-5">
-        <div class="card-title h5">{deck.name}</div>
-        <p class="card-text">{deck.description}</p>
-        <div class="d-flex justify-content-between">
+      <div className="mb-5">
+        <div className="card-title h5">{deck.name}</div>
+        <p className="card-text">{deck.description}</p>
+        <div className="d-flex justify-content-between">
           <div>
             <button
               type="button"
-              class="btn btn-secondary mr-2"
+              className="btn btn-secondary mr-2"
               onClick={() => push(`/decks/${deckId}/edit`)}
             >
               Edit
             </button>
             <button
               type="button"
-              class="btn btn-primary mr-2"
+              className="btn btn-primary mr-2"
               onClick={() => push(`/decks/${deck.id}/study`)}
             >
               Study
             </button>
             <button
               type="button"
-              class="btn btn-primary mr-2"
+              className="btn btn-primary mr-2"
               onClick={() => push(`/decks/${deckId}/cards/new`)}
             >
               Add Cards
@@ -126,7 +126,7 @@ function DeckProfile({ decks, setDecks }) {
           <div>
             <button
               type="button"
-              class="btn btn-danger mr-5"
+              className="btn btn-danger mr-5"
               onClick={deleteClickHandler}
             >
               Delete
