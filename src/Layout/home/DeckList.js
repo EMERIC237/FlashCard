@@ -11,7 +11,7 @@ function DeckList({ decks, setDecks }) {
     listDecks(abortController.signal).then(setDecks).catch(setError);
 
     return () => abortController.abort();
-  }, [decks,setDecks]);
+  }, []);
 
   if (error) {
     return <div>NO DECKS HERE</div>;

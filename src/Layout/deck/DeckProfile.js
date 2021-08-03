@@ -32,7 +32,7 @@ function DeckProfile({ decks, setDecks }) {
         abortController.abort();
       };
     }
-  }, [deckId, cards]);
+  }, [deckId]);
 
   if (error) {
     console.log(error);

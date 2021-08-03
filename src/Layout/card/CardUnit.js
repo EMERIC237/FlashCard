@@ -15,9 +15,9 @@ export default function CardUnit({
         `Delete this card?\n\n You will not be able to recover it.`
       )
     ) {
+      const cardId = card.id
       deleteCard(card.id)
-        .then(setCards([...cards]))
-        .then(window.location.reload());
+        .then(setCards(cards.filter((card) => card.id !== cardId)))
     }
   };
 
