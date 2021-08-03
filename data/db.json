@@ -11,28 +11,17 @@
       "id": 12
     },
     {
-      "name": "hhyyy",
-      "description": "hyuus",
-      "id": 13
-    },
-    {
-      "name": "hhuuufmf",
-      "description": "hhfufllf",
+      "name": "DECK3",
+      "description": "DECK3",
       "id": 14
     },
     {
-      "name": "heroku",
-      "description": "heroku",
-      "id": 15
+      "name": "GTY",
+      "description": "GTA",
+      "id": 28
     }
   ],
   "cards": [
-    {
-      "front": "e3544",
-      "back": "44423",
-      "deckId": 11,
-      "id": 61
-    },
     {
       "front": "4675",
       "back": "48758",
@@ -74,6 +63,48 @@
       "back": "9780",
       "deckId": 12,
       "id": 68
+    },
+    {
+      "front": "FCARD2",
+      "back": "BCARD2",
+      "deckId": 14,
+      "id": 72
+    },
+    {
+      "front": "FCARD1",
+      "back": "BCard1",
+      "deckId": 14,
+      "id": 73
+    },
+    {
+      "front": "FCARD3",
+      "back": "BCARD3",
+      "deckId": 14,
+      "id": 74
+    },
+    {
+      "front": "FCARTD4",
+      "back": "BCARD4",
+      "deckId": 14,
+      "id": 75
+    },
+    {
+      "front": "ATF",
+      "back": "ATF",
+      "deckId": 28,
+      "id": 84
+    },
+    {
+      "front": "EFT",
+      "back": "EFT",
+      "deckId": 28,
+      "id": 85
+    },
+    {
+      "front": "OGT",
+      "back": "OGT",
+      "deckId": 28,
+      "id": 86
     }
   ]
 }
