@@ -2,11 +2,12 @@ import React, { useState, useEffect } from "react";
 
 function CardStudy({ card, index, lengthOfCards, handleNumber }) {
   const [flip, setFlip] = useState(false);
-  const [text, setText] = useState("");
+  const [text, setText] = useState(card.front);
+  useEffect(()=>{
+    setText(card.front)
+    setFlip(false)
+  },[card])
 
-  useEffect(() => {
-    text === card.front ? setText(card.back) : setText(card.front);
-  }, [flip, card]);
 
   return (
     <div className="card">
@@ -18,7 +19,10 @@ function CardStudy({ card, index, lengthOfCards, handleNumber }) {
         <button
           type="button"
           className="btn btn-secondary"
-          onClick={() => setFlip(!flip)}
+          onClick={() => {
+            flip ? setText(card.front) : setText(card.back);
+            setFlip(!flip)}
+          }
         >
           flip
         </button>
